@@ -1,0 +1,258 @@
+{
+  "ledger_version": "1.0.0",
+  "suite_version": "3.3.0",
+  "created_at": "2026-11-08T23:22:24Z",
+  "request": {
+    "summary": "הפעלת חבילת הקידום על אתר עו\"ד טל אשכנזי ותיקון",
+    "mode": "end-to-end",
+    "authorized_boundary": "תיקונים מקומיים ודחיפה לגיטהאב. בלי שינויים בספקים חיצוניים"
+  },
+  "overall_state": "in-progress",
+  "skills": [
+    {
+      "skill": "ai-search-research",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-aeo",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-geo",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "ai-visibility-monitor",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-action-plan",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-agentic",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-architecture",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-authority",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-audit",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-commerce",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-competitor-pages",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-content",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-hreflang",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-images",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-local",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-news-discover",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-page",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-plan",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-programmatic",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-research",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-performance",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-schema",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-sitemap",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-technical",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "seo-video",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    },
+    {
+      "skill": "optimise-seo",
+      "state": "unassessed",
+      "reason": "",
+      "evidence_refs": [],
+      "output_refs": [],
+      "blocker": null,
+      "owner_decision_ref": null
+    }
+  ],
+  "coverage_summary": "",
+  "limitations": []
+}

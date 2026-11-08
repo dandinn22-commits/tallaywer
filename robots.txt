@@ -1,2 +1,3 @@
+# גרסאות טקסט ומפת תוכן: /sitemap.md, /llms.txt
 User-agent: *
 Allow: /

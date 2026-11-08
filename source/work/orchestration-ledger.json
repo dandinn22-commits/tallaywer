@@ -1,258 +1,351 @@
 {
-  "ledger_version": "1.0.0",
-  "suite_version": "3.3.0",
-  "created_at": "2026-11-08T23:22:24Z",
-  "request": {
-    "summary": "הפעלת חבילת הקידום על אתר עו\"ד טל אשכנזי ותיקון",
-    "mode": "end-to-end",
-    "authorized_boundary": "תיקונים מקומיים ודחיפה לגיטהאב. בלי שינויים בספקים חיצוניים"
+ "ledger_version": "1.0.0",
+ "suite_version": "3.3.0",
+ "created_at": "2026-11-08T23:22:24Z",
+ "request": {
+  "summary": "הפעלת חבילת הקידום על אתר עו\"ד טל אשכנזי ותיקון",
+  "mode": "end-to-end",
+  "authorized_boundary": "תיקונים מקומיים ודחיפה לגיטהאב. בלי שינויים בספקים חיצוניים"
+ },
+ "overall_state": "in-progress",
+ "skills": [
+  {
+   "skill": "ai-search-research",
+   "state": "blocked",
+   "reason": "מחקר רשמי מרובה מנועים דורש דומיין וגישה",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "מחקר רשמי מרובה מנועים דורש דומיין וגישה",
+   "owner_decision_ref": null
   },
-  "overall_state": "in-progress",
-  "skills": [
-    {
-      "skill": "ai-search-research",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-aeo",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-geo",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "ai-visibility-monitor",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-action-plan",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-agentic",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-architecture",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-authority",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-audit",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-commerce",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-competitor-pages",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-content",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-hreflang",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-images",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-local",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-news-discover",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-page",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-plan",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-programmatic",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-research",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-performance",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-schema",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-sitemap",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-technical",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "seo-video",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    },
-    {
-      "skill": "optimise-seo",
-      "state": "unassessed",
-      "reason": "",
-      "evidence_refs": [],
-      "output_refs": [],
-      "blocker": null,
-      "owner_decision_ref": null
-    }
-  ],
-  "coverage_summary": "",
-  "limitations": []
+  {
+   "skill": "seo-aeo",
+   "state": "blocked",
+   "reason": "בדיקה רשמית דורשת חבילת מחקר",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "בדיקה רשמית דורשת חבילת מחקר",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-geo",
+   "state": "blocked",
+   "reason": "בדיקה רשמית דורשת חבילת מחקר",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "בדיקה רשמית דורשת חבילת מחקר",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "ai-visibility-monitor",
+   "state": "blocked",
+   "reason": "אין אתר חי ומאגר שאילתות",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "אין אתר חי ומאגר שאילתות",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo",
+   "state": "completed",
+   "reason": "תיאום כל המסלולים וסיכום",
+   "evidence_refs": [
+    "delivery-summary.md"
+   ],
+   "output_refs": [
+    "delivery-summary.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-action-plan",
+   "state": "completed",
+   "reason": "תיקונים בהרשאת המשתמש, עם גיט לשחזור",
+   "evidence_refs": [
+    "delivery-summary.md"
+   ],
+   "output_refs": [
+    "delivery-summary.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-agentic",
+   "state": "completed",
+   "reason": "טופס עם תוויות ובדיקה אוטומטית ללא הפרות",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-architecture",
+   "state": "completed",
+   "reason": "קישורים הקשריים בין דפי הנושא",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-authority",
+   "state": "blocked",
+   "reason": "אין דומיין ונתוני קישורים",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "אין דומיין ונתוני קישורים",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-audit",
+   "state": "completed",
+   "reason": "בדיקה מקומית ללא ציון מאוחד",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-commerce",
+   "state": "not-applicable",
+   "reason": "אין מוצרים",
+   "evidence_refs": [],
+   "output_refs": [],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-competitor-pages",
+   "state": "not-applicable",
+   "reason": "לא התבקשו דפי השוואה",
+   "evidence_refs": [],
+   "output_refs": [],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-content",
+   "state": "completed",
+   "reason": "תוכן הורחב וטעון אישור עורכת דין",
+   "evidence_refs": [
+    "content-review.md",
+    "content-decisions.md"
+   ],
+   "output_refs": [
+    "content-review.md",
+    "content-decisions.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-hreflang",
+   "state": "not-applicable",
+   "reason": "עברית בלבד",
+   "evidence_refs": [],
+   "output_refs": [],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-images",
+   "state": "completed",
+   "reason": "תמונות מכווצות עם טקסט חלופי ומידות",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-local",
+   "state": "blocked",
+   "reason": "אין גישה לפרופיל עסק",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "אין גישה לפרופיל עסק",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-news-discover",
+   "state": "not-applicable",
+   "reason": "אינו אתר חדשות",
+   "evidence_refs": [],
+   "output_refs": [],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-page",
+   "state": "completed",
+   "reason": "כותרות ותיאורים נבדקו בכל הדפים",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-plan",
+   "state": "completed",
+   "reason": "צעדים בסיכום",
+   "evidence_refs": [
+    "delivery-summary.md"
+   ],
+   "output_refs": [
+    "delivery-summary.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-programmatic",
+   "state": "completed",
+   "reason": "דמיון מרבי בין דפי נושא 0.42",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-research",
+   "state": "completed",
+   "reason": "סקירת תוצאות גוגל לחמישה חיפושים בעברית. נתוני נפח לא זמינים",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-performance",
+   "state": "blocked",
+   "reason": "אין נתוני מדידה לפני עלייה",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "אין נתוני מדידה לפני עלייה",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-schema",
+   "state": "completed",
+   "reason": "JSON-LD תקין תחבירית ותואם תוכן גלוי",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-sitemap",
+   "state": "blocked",
+   "reason": "מפת XML דורשת דומיין. מפת טקסט נוצרה",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": "מפת XML דורשת דומיין. מפת טקסט נוצרה",
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-technical",
+   "state": "completed",
+   "reason": "סמל אתר, מידות תמונות וגרסאות טקסט. בדיקה חיה תלויה בדומיין",
+   "evidence_refs": [
+    "seo-review.md"
+   ],
+   "output_refs": [
+    "seo-review.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "seo-video",
+   "state": "not-applicable",
+   "reason": "אין סרטונים",
+   "evidence_refs": [],
+   "output_refs": [],
+   "blocker": null,
+   "owner_decision_ref": null
+  },
+  {
+   "skill": "optimise-seo",
+   "state": "completed",
+   "reason": "יושם ונדחף לגיטהאב, לא פורסם חי",
+   "evidence_refs": [
+    "delivery-summary.md"
+   ],
+   "output_refs": [
+    "delivery-summary.md"
+   ],
+   "blocker": null,
+   "owner_decision_ref": null
+  }
+ ],
+ "coverage_summary": "",
+ "limitations": [
+  "אין דומיין חי",
+  "אין נתוני נפח חיפוש"
+ ]
 }

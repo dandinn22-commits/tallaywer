@@ -218,8 +218,8 @@ home=head('עורכת דין רשלנות רפואית ונזקי גוף | טל 
 PULSE='<svg class="pulse" aria-hidden="true" viewBox="0 0 1440 130" preserveAspectRatio="none" fill="none"><path pathLength="1" vector-effect="non-scaling-stroke" d="M0 86H470l16-10 16 10h26l12 18 20-96 20 116 14-38h30l18-14 18 14H1440"/></svg>'
 ruler=lambda n,lbl:f'<div class="r"><span class="r-l">{lbl}</span><div class="r-t"><i style="width:{n*10}%"></i></div><b>{n}</b></div>'
 axis="".join(f'<span style="right:{k*10}%">{k}</span>' for k in range(0,11))
-hero_visual=f'<img class="hero-photo" src="{url("hero")}" alt="שולחן עבודה עם תיקים משפטיים וצילום רנטגן" fetchpriority="high">'
-statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" loading="lazy">' if PORTRAIT else f'<div class="plate"><img src="{url("office")}" alt="חדר ישיבות עם ספרי משפט" loading="lazy"></div>')
+hero_visual=f'<img class="hero-photo" src="{url("hero")}" alt="שולחן עבודה עם תיקים משפטיים וצילום רנטגן" width="1344" height="752" decoding="async" fetchpriority="high">'
+statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" loading="lazy">' if PORTRAIT else f'<div class="plate"><img src="{url("office")}" alt="חדר ישיבות עם ספרי משפט" width="1024" height="688" decoding="async" loading="lazy"></div>')
 home+=f'''<section class="hero"><div class="wrap hero-g"><div class="hero-t">
 <p class="kicker">{NAME} · גבעתיים</p>
 <h1>עורכת דין<br><em>רשלנות רפואית</em><br>ונזקי גוף</h1>

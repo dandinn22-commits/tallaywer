@@ -3,6 +3,7 @@ import json, os, shutil, html, re, zipfile
 from PIL import Image
 from content import SERVICES, GUIDES, GENERAL_FAQ, S
 from icons import icon
+from content2 import EXTRA, LAWS, LAW_OF
 
 SITE_URL = ""  # למלא כשקונים דומיין, למשל https://www.example.co.il
 SRC = os.path.dirname(os.path.abspath(__file__))
@@ -36,7 +37,7 @@ oth = [s for s in SERVICES if s["group"] == "other"]
 def head(title, desc, slug, schema, noindex=False):
     canon = f'<link rel="canonical" href="{SITE_URL}/{"" if slug=="index" else slug+".html"}">\n<meta property="og:url" content="{SITE_URL}/{"" if slug=="index" else slug+".html"}">' if SITE_URL else ""
     img = f'<meta property="og:image" content="{SITE_URL}/assets/hero.webp">' if SITE_URL else ""
-    g = f'<script async src="https://www.googletagmanager.com/gtag/js?id={GTAG}"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{GTAG}");</script>' if GTAG else ""
+    g = ''
     return f'''<!doctype html>
 <html lang="he" dir="rtl">
 <head>
@@ -85,15 +86,16 @@ fid = [0]
 def form(title="בדיקת התיק ללא עלות", sub="השאירו פרטים ועו\"ד טל אשכנזי תחזור אליכם.", topic=None):
     fid[0] += 1; i = fid[0]
     opts = topics()
-    if topic: opts = f'<option selected>{e(topic)}</option>' + opts
+    field=f'<label for="t{i}">במה מדובר?</label><select id="t{i}" name="topic">{opts}</select>'
+    if topic: field=f'<input type="hidden" name="topic" value="{e(topic)}">'
     return f'''<form class="lead" data-lead novalidate>
 <h2 class="lead-h">{title}</h2><p class="lead-sub">{sub}</p>
 <label for="n{i}">שם מלא</label><input id="n{i}" name="name" autocomplete="name" required>
 <label for="p{i}">טלפון</label><input id="p{i}" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required>
-<label for="t{i}">במה מדובר?</label><select id="t{i}" name="topic">{opts}</select>
+{field}
 <p class="err" role="alert" hidden></p>
 <button class="btn gold" type="submit">לבדיקת התיק</button>
-<p class="fine">הפרטים נשלחים בוואטסאפ לעו"ד טל אשכנזי. אין צורך לפרט מידע רפואי בשלב זה. <a href="privacy.html">מדיניות פרטיות</a></p>
+<p class="fine">הפרטים נמסרים לעו"ד טל אשכנזי כדי לחזור אליכם ולבדוק את פנייתכם, ונשלחים באמצעות וואטסאפ. מסירתם אינה חובה לפי חוק, אך בלעדיהם לא נוכל לחזור אליכם. זכותכם לעיין במידע ולבקש לתקנו. <a href="privacy.html">מדיניות פרטיות</a></p>
 </form>'''
 
 def foot():
@@ -107,6 +109,11 @@ def foot():
 <div><h3>המשרד</h3><ul><li><a href="about.html">אודות</a></li><li><a href="guides.html">מדריכים</a></li><li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li><a href="privacy.html">מדיניות פרטיות</a></li></ul></div>
 </div><p class="wrap legal">המידע באתר הוא מידע כללי ואינו מהווה ייעוץ משפטי או תחליף לבדיקת המקרה הפרטני. פרסום זה אינו מבטיח תוצאה.</p></footer>
 <div class="mobile-bar"><a href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}חייגו עכשיו</a><a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>
+<div class="float" aria-label="יצירת קשר מהירה"><a class="fl wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp" aria-label="שליחת הודעה בוואטסאפ">{ICON_WA}</a><a class="fl call" href="tel:{PHONE_INTL}" data-ev="call" aria-label="חיוג ל-{PHONE}">{ICON_PHONE}</a></div>
+<button class="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y" aria-label="פתיחת תפריט נגישות"><svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="12" cy="4.500" r="2.200"/><path d="M4 8.200l.6-1.800c4.900 1.300 9.900 1.300 14.800 0l.6 1.800c-2 .6-4 1-6 1.200v3.300l2.500 7.500-1.800.6L12.300 14h-.6l-2.400 6.800-1.800-.6 2.500-7.500V9.400c-2-.2-4-.6-6-1.200z"/></svg></button>
+<div class="a11y" id="a11y" role="group" aria-label="הגדרות נגישות" hidden><h2>נגישות</h2><button type="button" data-a="bigger">הגדלת טקסט</button><button type="button" data-a="smaller">הקטנת טקסט</button><button type="button" data-a="contrast" aria-pressed="false">ניגודיות גבוהה</button><button type="button" data-a="links" aria-pressed="false">הדגשת קישורים</button><button type="button" data-a="still" aria-pressed="false">עצירת הנפשות</button><button type="button" data-a="reset">איפוס</button><a href="accessibility.html">הצהרת נגישות</a></div>
+<div class="consent" data-consent hidden><p>אנו משתמשים בעוגיות של גוגל למדידה ופרסום, רק אם תאשרו. <a href="privacy.html#cookies">פרטים נוספים</a></p><div class="consent-b"><button type="button" class="btn dark" data-c="y">אישור</button><button type="button" class="btn line" data-c="n">דחייה</button></div></div>
+<script>window.SITE_GTAG="{GTAG}";</script>
 <script src="main.js"></script>
 </body></html>'''
 
@@ -127,6 +134,8 @@ def graph(*x): return {"@context":"https://schema.org","@graph":list(x)}
 def render_items(items):
     o = ""
     for it in items:
+        if isinstance(it,dict):
+            o+="<div class='tbl'><table><thead><tr>"+"".join(f"<th scope='col'>{e(c)}</th>" for c in it["t"])+"</tr></thead><tbody>"+"".join("<tr>"+"".join(f"<td>{e(c)}</td>" for c in r)+"</tr>" for r in it["r"])+"</tbody></table></div>"; continue
         o += "<ul class='ticks'>"+"".join(f"<li>{e(i)}</li>" for i in it)+"</ul>" if isinstance(it,list) else f"<p>{e(it)}</p>"
     return o
 def faq_html(faqs):
@@ -153,7 +162,13 @@ def service_page(s, kind):
     ld = graph(BIZ, crumbs_ld(trail), faq_ld(s["faqs"]),
       ({"@type":"Article","headline":s["h1"],"description":s["desc"],"author":{"@type":"Person","name":"טל אשכנזי"},"dateModified":"2026-11-09","inLanguage":"he"} if kind=="guide" else {"@type":"Service","name":s["h1"],"serviceType":s["kw"],"provider":{"@id":"#office"},"areaServed":"ישראל"}))
     bc = "".join((f'<a href="{u}">{e(n)}</a><span>/</span>' if u else f'<span aria-current="page">{e(n)}</span>') for n,u in trail)
-    secs = "".join(f"<section><h2>{e(x['h'])}</h2>{render_items(x['items'])}</section>" for x in s["sections"])
+    mid=f'<aside class="mid"><p><strong>רוצים לדעת איך זה נוגע למקרה שלכם?</strong> שיחה קצרה יכולה להבהיר מה כדאי לבדוק.</p><a class="btn dark" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a></aside>'
+    parts=[f"<section><h2>{e(x['h'])}</h2>{render_items(x['items'])}</section>" for x in s["sections"]]
+    parts.insert(min(2,len(parts)),mid)
+    secs="".join(parts)
+    lawkey=LAW_OF.get(s["slug"],"med")
+    laws="<section><h2>הבסיס המשפטי</h2><ul class='ticks'>"+"".join(f"<li>{e(l)}</li>" for l in LAWS[lawkey])+"</ul></section>"
+    first='<section class="first"><h2>מה מקבלים בשיחה הראשונה</h2><ul class="ticks"><li>הבנה ראשונית אם כדאי להמשיך לבדוק את המקרה</li><li>הערכה של המועד האחרון להגשת תביעה</li><li>רשימה של המסמכים שכדאי לאסוף</li></ul></section>'
     pool = (med if s.get("group")=="med" else oth if s.get("group") else GUIDES)
     rel = [x for x in pool if x["slug"]!=s["slug"]][:3]
     relh = "".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["menu"])}</strong><span>{e(x["card"])}</span></a>' for x in rel)
@@ -162,7 +177,7 @@ def service_page(s, kind):
 <div class="actions"><a class="btn gold" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn line" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>
 <p class="trust">בדיקה ראשונית ללא עלות · שכר טרחה רק אם מתקבל פיצוי</p></div></div>
 <div class="wrap layout"><article class="prose">
-<div class="answer"><h2>בקצרה</h2><p>{e(s["short"])}</p></div>{calc() if s.get("calc") else ""}{secs}
+<div class="answer"><h2>בקצרה</h2><p>{e(s["short"])}</p></div>{first}{calc() if s.get("calc") else ""}{secs}{laws}
 <section><h2>איך התהליך עובד</h2>{steps()}</section>
 <section><h2>שאלות נפוצות</h2>{faq_html(s["faqs"])}</section>
 <p class="byline">נכתב על ידי {NAME}. עודכן בנובמבר 2026.</p>
@@ -177,6 +192,9 @@ def simple(slug,title,desc,h1,content,noindex=False,ld=None,with_form=False):
     b+=f'<div class="plain-head">{icon("contact" if slug=="contact" else "insurance-claims","ph-icon")}<div class="wrap"><h1>{e(h1)}</h1></div></div><div class="wrap {"layout" if with_form else "narrow"}"><article class="prose">{content}</article>{aside}</div>'+foot()
     open(f'{OUT}/{slug}.html','w',encoding='utf-8').write(b)
 
+for s in SERVICES+GUIDES:
+    x=EXTRA.get(s["slug"],{})
+    s["sections"]=s["sections"]+x.get("s",[]); s["faqs"]=s["faqs"]+x.get("f",[])
 for s in SERVICES: service_page(s,"service")
 for g in GUIDES: service_page(g,"guide")
 
@@ -233,9 +251,25 @@ simple("contact",'צרו קשר | עו"ד טל אשכנזי, כצנלסון 97 �
 
 simple("thanks",'תודה על פנייתכם | עו"ד טל אשכנזי','','תודה על פנייתכם',f'<p>אם הוואטסאפ לא נפתח, אפשר לשלוח הודעה ישירות או להתקשר:</p><div class="actions"><a class="btn gold" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn dark" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>',noindex=True)
 
-simple("accessibility",'הצהרת נגישות | עו"ד טל אשכנזי','הצהרת נגישות של אתר עו"ד טל אשכנזי.','הצהרת נגישות',f'''<p>אנו פועלים כדי שהאתר יהיה נגיש לכלל הציבור, כולל אנשים עם מוגבלות.</p><section><h2>מה נעשה באתר</h2><ul class="ticks"><li>ניווט מלא במקלדת ודילוג לתוכן</li><li>מבנה כותרות מסודר</li><li>טקסט חלופי לתמונות בעלות תוכן</li><li>ניגודיות צבעים והתאמה לנייד</li></ul></section><section><h2>נתקלתם בקושי?</h2><p>אפשר לפנות אלינו בטלפון <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a> ונטפל בכך.</p><p>כתובת: {ADDR}.</p></section><p class="byline">עודכן בנובמבר 2026.</p>''')
+simple("accessibility",'הצהרת נגישות | עו"ד טל אשכנזי','הצהרת הנגישות של אתר עו"ד טל אשכנזי: התאמות, דרכי פנייה ופרטי רכזת הנגישות.','הצהרת נגישות',f'''<div class="answer"><p>אנו רואים חשיבות בהנגשת האתר לאנשים עם מוגבלות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998, ולתקנות הנגישות לשירות, התשע"ג-2013.</p></div>
+<section><h2>התקן שלפיו נבנה האתר</h2><p>האתר נבנה במטרה לעמוד בדרישות תקן ישראלי 5568, המבוסס על הנחיות נגישות לתוכן אינטרנט, ברמה AA.</p></section>
+<section><h2>התאמות שבוצעו</h2><ul class="ticks"><li>ניווט מלא באמצעות מקלדת וקישור דילוג לתוכן</li><li>מבנה כותרות היררכי ותוויות לשדות טופס</li><li>טקסט חלופי לתמונות בעלות תוכן</li><li>התאמה למסכי נייד ולהגדלת טקסט</li><li>תפריט נגישות: הגדלת טקסט, ניגודיות גבוהה, הדגשת קישורים ועצירת הנפשות</li></ul></section>
+<section><h2>שימוש בתפריט הנגישות</h2><p>לחצו על כפתור הנגישות בפינת המסך, או הגיעו אליו באמצעות המקש Tab.</p></section>
+<section><h2>נגישות המשרד</h2><p>המשרד נמצא בכצנלסון 97, גבעתיים. למידע על הסדרי נגישות לפני הגעה, ולתיאום פגישה בטלפון או מרחוק, אפשר לפנות אלינו.</p></section>
+<section><h2>נתקלתם בקושי?</h2><p>נשמח לקבל פנייה ולטפל בה. כדי שנוכל לסייע, ציינו את הדף ואת הבעיה.</p><ul class="ticks"><li>רכזת נגישות: עו"ד טל אשכנזי</li><li>טלפון ווואטסאפ: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></li><li>כתובת: {ADDR}</li></ul></section>
+<p class="byline">ההצהרה עודכנה בנובמבר 2026.</p>''')
 
-simple("privacy",'מדיניות פרטיות | עו"ד טל אשכנזי','מדיניות הפרטיות של אתר עו"ד טל אשכנזי.','מדיניות פרטיות',f'''<section><h2>איזה מידע נאסף</h2><p>כשאתם ממלאים טופס נאספים שמכם, הטלפון שלכם והנושא שבחרתם. הטופס פותח הודעת וואטסאפ שאתם שולחים בעצמכם.</p></section><section><h2>למה המידע משמש</h2><p>כדי לחזור אליכם ולבדוק את פנייתכם. המידע נשמר בסודיות ולא נמכר לאחרים.</p></section><section><h2>מידע רפואי</h2><p>אין צורך למסור מידע רפואי דרך הטופס. פרטים רפואיים יימסרו בשיחה ישירה עם עורכת הדין.</p></section><section><h2>עוגיות ופרסום</h2><p>האתר עשוי להשתמש בכלים של גוגל למדידת ביצועים ופרסום. אפשר לחסום עוגיות בהגדרות הדפדפן.</p></section><section><h2>זכויותיכם</h2><p>אפשר לבקש לעיין במידע, לתקנו או למחקו בפנייה לטלפון <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a>.</p></section><p class="byline">עודכן בנובמבר 2026.</p>''')
+simple("privacy",'מדיניות פרטיות | עו"ד טל אשכנזי','מדיניות הפרטיות של אתר עו"ד טל אשכנזי: איזה מידע נאסף, למה הוא משמש, ומהן זכויותיכם לפי חוק הגנת הפרטיות.','מדיניות פרטיות',f'''<div class="answer"><p>מדיניות זו מסבירה איזה מידע נאסף באתר, למה הוא משמש ומהן זכויותיכם לפי חוק הגנת הפרטיות, התשמ"א-1981.</p></div>
+<section><h2>מי אחראית למידע</h2><p>{NAME}, {ADDR}, טלפון <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a>.</p></section>
+<section><h2>איזה מידע נאסף</h2><ul class="ticks"><li>בטופס: שם, טלפון, והנושא שאליו אתם פונים</li><li>בשיחה או בהודעה: מה שתבחרו למסור</li><li>בעת גלישה: נתונים טכניים כגון כתובת רשת וסוג דפדפן, הנחוצים לפעולת האתר</li></ul></section>
+<section><h2>למה המידע משמש</h2><ul class="ticks"><li>חזרה אליכם ובדיקת הפנייה</li><li>מתן שירות משפטי, אם תבחרו בכך</li><li>עמידה בחובות שבדין</li><li>אם תאשרו: מדידה ושיפור של האתר והפרסום</li></ul></section>
+<section><h2>אין חובה למסור מידע</h2><p>אין חובה חוקית למסור מידע באתר, ומסירתו נעשית מרצונכם. בלי פרטי התקשרות לא נוכל לחזור אליכם.</p></section>
+<section><h2>מידע רפואי</h2><p>מידע רפואי הוא מידע רגיש. אין צורך למסור אותו בטופס או בוואטסאפ. פרטים רפואיים נמסרים בשלב הבדיקה עצמה, ישירות לעורכת הדין, ונשמרים בסודיות מקצועית.</p></section>
+<section><h2>למי המידע עשוי להימסר</h2><ul class="ticks"><li>חברת האחסון של האתר</li><li>וואטסאפ, כאשר אתם שולחים הודעה. השירות מופעל על ידי חברה מחוץ לישראל</li><li>גוגל, לגופנים באתר, ולמדידה ופרסום אם תאשרו</li><li>מומחים ונותני שירות הקשורים בטיפול בתיק, בהסכמתכם</li><li>רשויות, אם החוק מחייב זאת</li></ul><p>איננו מוכרים מידע אישי.</p></section>
+<section id="cookies"><h2>עוגיות</h2><p>עוגיות למדידה ולפרסום יופעלו רק לאחר אישורכם בהודעה שתוצג באתר. אפשר למחוק או לחסום עוגיות בהגדרות הדפדפן.</p></section>
+<section><h2>שמירה ואבטחה</h2><p>המידע נשמר כל עוד הוא נחוץ למטרות שלעיל ולפי חובות הדין, ואנו נוקטים אמצעים סבירים להגנה עליו. אין אפשרות להבטיח הגנה מוחלטת באינטרנט.</p></section>
+<section><h2>הזכויות שלכם</h2><p>לפי חוק הגנת הפרטיות אתם זכאים לעיין במידע שנשמר עליכם ולבקש לתקנו או למחקו אם אינו נכון, שלם, ברור או מעודכן. אפשר לפנות בטלפון או בכתב לכתובת המשרד. אפשר גם לפנות לרשות להגנת הפרטיות.</p></section>
+<p class="byline">עודכן בנובמבר 2026.</p>''')
 
 shutil.copy(SRC+"/style.css",OUT); shutil.copy(SRC+"/main.js",OUT)
 open(OUT+"/.htaccess","w").write('''AddDefaultCharset UTF-8
@@ -249,7 +283,22 @@ ExpiresByType text/css "access plus 1 month"
 ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 ''')
-llm=[f"# {NAME}","",f"> עורכת דין העוסקת ברשלנות רפואית ונזקי גוף. {ADDR}. טלפון {PHONE}. 5 שנות ניסיון.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in med]+["","## נזקי גוף וביטוח"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in GUIDES]
+def md(p):
+    o=[f"# {p['h1']}","",p["short"],""]
+    for x in p["sections"]:
+        o+=[f"## {x['h']}",""]
+        for it in x["items"]:
+            if isinstance(it,dict):
+                o+=["| "+" | ".join(it["t"])+" |","|"+"---|"*len(it["t"])]+["| "+" | ".join(r)+" |" for r in it["r"]]+[""]
+            elif isinstance(it,list): o+=[f"- {i}" for i in it]+[""]
+            else: o+=[it,""]
+    o+=["## שאלות נפוצות",""]
+    for q,a in p["faqs"]: o+=[f"### {q}","",a,""]
+    o+=[f"{NAME}, {ADDR}, טלפון {PHONE}. מידע כללי שאינו ייעוץ משפטי.",""]
+    open(f"{OUT}/{p['slug']}.md","w",encoding="utf-8").write("\n".join(o))
+for p in SERVICES+GUIDES: md(p)
+open(OUT+"/sitemap.md","w",encoding="utf-8").write("\n".join([f"# מפת תוכן: {NAME}",""]+[f"- [{p['h1']}]({p['slug']}.md)" for p in SERVICES+GUIDES]))
+llm=[f"# {NAME}","",f"> עורכת דין העוסקת ברשלנות רפואית ונזקי גוף. {ADDR}. טלפון {PHONE}. 5 שנות ניסיון.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in med]+["","## נזקי גוף וביטוח"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in GUIDES]+["","גרסאות טקסט של הדפים נמצאות במפת התוכן: [sitemap.md](sitemap.md).","לכל דף יש גרסת טקסט באותו שם עם הסיומת md."]
 open(OUT+"/llms.txt","w",encoding="utf-8").write("\n".join(llm))
 if SITE_URL:
     pg=[f[:-5] for f in sorted(os.listdir(OUT)) if f.endswith(".html") and f!="thanks.html"]

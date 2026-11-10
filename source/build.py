@@ -116,6 +116,7 @@ def foot():
 <div class="consent" data-consent hidden><p>אנו משתמשים בעוגיות של גוגל למדידה ופרסום, רק אם תאשרו. <a href="privacy.html#cookies">פרטים נוספים</a></p><div class="consent-b"><button type="button" class="btn dark" data-c="y">אישור</button><button type="button" class="btn line" data-c="n">דחייה</button></div></div>
 <script>window.SITE_GTAG="{GTAG}";</script>
 <script src="main.js"></script>
+<script src="/lead-alerts.js?v=1" data-brand="עו&quot;ד טל אשכנזי" defer></script>
 </body></html>'''
 
 OFFICE_ID=(SITE_URL+"/#office") if SITE_URL else "#office"

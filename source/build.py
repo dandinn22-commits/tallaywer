@@ -238,7 +238,7 @@ statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל �
 home+=f'''<section class="hero"><div class="wrap hero-g"><div class="hero-t">
 <p class="kicker">{NAME}</p>
 <h1>עורכת דין<br><em>רשלנות רפואית</em><br>ונזקי גוף</h1>
-<p class="lede">נפגעתם מטיפול רפואי או בתאונה? אבדוק את התיק באופן אישי, אסביר מה האפשרויות ואלווה אתכם עד סיום ההליך.</p>
+<p class="lede">נפגעתם מטיפול רפואי או בתאונה? אבדוק את המקרה שלכם, אסביר בשפה פשוטה מה הזכויות והאפשרויות, ואדאג שתקבלו את הליווי המשפטי המתאים.</p>
 <div class="actions"><a class="btn dark" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn line" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>
 <p class="note">ייעוץ ראשוני ללא עלות · שכר טרחה רק במקרה של פיצוי</p></div>
 <div class="hero-f">{hero_visual}{form("בדיקת התיק ללא עלות")}</div></div></section>

@@ -104,7 +104,7 @@ def foot():
 <section class="final"><div class="wrap final-in"><div><p class="f-k">שיחת ייעוץ ראשונית ללא עלות</p><h2>דברו ישירות עם עו"ד טל אשכנזי</h2></div>
 <div class="f-act"><a class="f-phone" href="tel:{PHONE_INTL}" data-ev="call" dir="ltr">{PHONE}</a><a class="btn gold" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}כתבו בוואטסאפ</a></div></div></section>
 <footer class="foot"><div class="wrap cols">
-<div><p class="f-name">{NAME}</p><p>{ADDR}</p><p>טלפון: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></p></div>
+<div><p class="f-name">עו"ד טל וולק אשכנזי</p><p>{ADDR}</p><p>טלפון: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></p></div>
 <div><h3>רשלנות רפואית</h3><ul>{links(med[:6])}</ul></div>
 <div><h3>נזקי גוף וביטוח</h3><ul>{links(oth)}</ul></div>
 <div><h3>המשרד</h3><ul><li><a href="about.html">אודות</a></li><li><a href="guides.html">מדריכים</a></li><li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li><a href="privacy.html">מדיניות פרטיות</a></li></ul></div>

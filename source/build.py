@@ -104,7 +104,7 @@ def foot():
 <section class="final"><div class="wrap final-in"><div><p class="f-k">שיחת ייעוץ ראשונית ללא עלות</p><h2>דברו ישירות עם עו"ד טל אשכנזי</h2></div>
 <div class="f-act"><a class="f-phone" href="tel:{PHONE_INTL}" data-ev="call" dir="ltr">{PHONE}</a><a class="btn gold" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}כתבו בוואטסאפ</a></div></div></section>
 <footer class="foot"><div class="wrap cols">
-<div><p class="f-name">עו"ד טל וולק אשכנזי</p><p>{ADDR}</p><p>טלפון: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></p></div>
+<div><p class="f-name">עו"ד טל וולק אשכנזי</p><p>מספר רישיון: 90780</p><p>{ADDR}</p><p>טלפון: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></p></div>
 <div><h3>רשלנות רפואית</h3><ul>{links(med)}</ul></div>
 <div><h3>נזקי גוף וביטוח</h3><ul>{links(oth)}</ul></div>
 <div><h3>המשרד</h3><ul><li><a href="about.html">אודות</a></li><li><a href="personal-injury.html">נזקי גוף</a></li><li><a href="guides.html">מדריכים</a></li>{links(GUIDES)}<li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li><a href="privacy.html">מדיניות פרטיות</a></li></ul></div>
@@ -123,7 +123,7 @@ TAL_ID=(SITE_URL+"/#tal") if SITE_URL else "#tal"
 BIZ = {"@type":"LegalService","@id":OFFICE_ID,"name":NAME,"alternateName":["עו\"ד טל וולק אשכנזי","טל אשכנזי משרד עורכי דין"],"telephone":PHONE_INTL,
  "address":{"@type":"PostalAddress","streetAddress":"כצנלסון 97","addressLocality":"גבעתיים","addressCountry":"IL"},
  "areaServed":{"@type":"Country","name":"ישראל"},"knowsLanguage":"he",
- "employee":{"@type":"Person","@id":TAL_ID,"name":"טל אשכנזי","alternateName":"טל וולק אשכנזי","jobTitle":"עורכת דין","worksFor":{"@id":OFFICE_ID},"knowsAbout":["רשלנות רפואית","נזקי גוף"]},
+ "employee":{"@type":"Person","@id":TAL_ID,"name":"טל אשכנזי","alternateName":"טל וולק אשכנזי","jobTitle":"עורכת דין","identifier":{"@type":"PropertyValue","name":"מספר רישיון בלשכת עורכי הדין","value":"90780"},"worksFor":{"@id":OFFICE_ID},"knowsAbout":["רשלנות רפואית","נזקי גוף"]},
  "knowsAbout":["רשלנות רפואית","נזקי גוף","תאונות דרכים","תאונות עבודה","ביטוח לאומי","אובדן כושר עבודה","תביעות ביטוח"]}
 if SITE_URL: BIZ["url"] = SITE_URL + "/"
 
@@ -260,7 +260,7 @@ pic=f'''<div class="answer"><h2>בקצרה</h2><p>נזקי גוף הם פגיע�
 <section><h2>הנושאים</h2><div class="rel-g">'''+"".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["menu"])}</strong><span>{e(x["card"])}</span></a>' for x in oth)+'</div></section>'
 simple("personal-injury",'עורך דין נזקי גוף: תאונות, ביטוח לאומי וביטוח | טל אשכנזי','נפגעתם בתאונה, בעבודה או בטיפול רפואי? כך מבינים ממי מבקשים פיצוי ומה עושים עכשיו. בדיקה ראשונית ללא עלות. 053-619-9967.','עורכת דין נזקי גוף',pic,ld=graph(BIZ,crumbs_ld([("ראשי","./"),("נזקי גוף וביטוח","")])),with_form=True)
 
-aboutc=f'''<div class="answer"><p>עו"ד טל אשכנזי עוסקת בתביעות רשלנות רפואית ונזקי גוף, עם חמש שנות ניסיון. המשרד נמצא בכצנלסון 97 בגבעתיים ומלווה לקוחות מכל הארץ.</p></div>
+aboutc=f'''<div class="answer"><p>עו"ד טל אשכנזי עוסקת בתביעות רשלנות רפואית ונזקי גוף, עם חמש שנות ניסיון (מספר רישיון 90780). המשרד נמצא בכצנלסון 97 בגבעתיים ומלווה לקוחות מכל הארץ.</p></div>
 <section><h2>למה בחרתי בתחום</h2><p>אנשים מגיעים אליי אחרי תקופה קשה, ובדרך כלל בלי לדעת אם מה שקרה להם הוא טעות או גזירת גורל. התפקיד שלי מתחיל בלברר את זה ביושר.</p></section>
 <section><h2>איך אני עובדת</h2><ul class="ticks"><li>בודקת כל תיק בעצמי ואומרת מה הסיכויים, גם כשהם נמוכים</li><li>מסבירה בשפה פשוטה את כל שלבי ההליך</li><li>מעדכנת באופן שוטף</li><li>פועלת עם רופאים מומחים לפי תחום המקרה</li><li>מגדירה מראש בכתב את שכר הטרחה ואת ההוצאות</li></ul></section>
 <section><h2>תחומי עיסוק</h2><ul class="ticks"><li><a href="medical-malpractice.html">רשלנות רפואית</a></li><li><a href="road-accidents.html">תאונות דרכים</a></li><li><a href="work-accidents.html">תאונות עבודה</a></li><li><a href="national-insurance.html">ביטוח לאומי</a></li><li><a href="disability-insurance.html">אובדן כושר עבודה</a></li><li><a href="insurance-claims.html">תביעות ביטוח</a></li></ul></section>'''
@@ -355,7 +355,7 @@ open(OUT+"/index.md","w",encoding="utf-8").write(f"# {NAME}\n\nעו\"ד טל א�
 def lst(a): return [f"- [{p['h1']}]({p['slug']}.md)" for p in a]
 open(OUT+"/sitemap.md","w",encoding="utf-8").write("\n".join([f"# מפת תוכן: {NAME}","","- [דף הבית](index.md)","- [אודות](about.md)","- [שאלות ותשובות](faq.md)","- [צרו קשר](contact.md)","","## רשלנות רפואית",""]+lst(med)+["","## נזקי גוף וביטוח","","- [עורכת דין נזקי גוף: סקירה](personal-injury.md)"]+lst(oth)+["","## מדריכים",""]+lst(GUIDES)+["","## מדיניות","","- [הצהרת נגישות](accessibility.md)","- [מדיניות פרטיות](privacy.md)",""]))
 U=SITE_URL+"/" if SITE_URL else ""
-llm=[f"# {NAME}","",f"> עו\"ד טל אשכנזי (טל וולק אשכנזי), עורכת דין העוסקת ברשלנות רפואית ונזקי גוף, עם 5 שנות ניסיון. {ADDR}. טלפון {PHONE}. מלווה לקוחות מכל הארץ.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in med]+["","## נזקי גוף וביטוח",f"- [עורכת דין נזקי גוף]({U}personal-injury.md): ממי מבקשים פיצוי לפי סוג הפגיעה."]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in GUIDES]+["","## המשרד",f"- [אודות]({U}about.md)",f"- [שאלות ותשובות]({U}faq.md)",f"- [צרו קשר]({U}contact.md)","",f"מפת התוכן המלאה: [sitemap.md]({U}sitemap.md). לכל דף באתר יש גרסת HTML באותו שם עם הסיומת html."]
+llm=[f"# {NAME}","",f"> עו\"ד טל אשכנזי (טל וולק אשכנזי), עורכת דין העוסקת ברשלנות רפואית ונזקי גוף, עם 5 שנות ניסיון, מספר רישיון 90780. {ADDR}. טלפון {PHONE}. מלווה לקוחות מכל הארץ.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in med]+["","## נזקי גוף וביטוח",f"- [עורכת דין נזקי גוף]({U}personal-injury.md): ממי מבקשים פיצוי לפי סוג הפגיעה."]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in GUIDES]+["","## המשרד",f"- [אודות]({U}about.md)",f"- [שאלות ותשובות]({U}faq.md)",f"- [צרו קשר]({U}contact.md)","",f"מפת התוכן המלאה: [sitemap.md]({U}sitemap.md). לכל דף באתר יש גרסת HTML באותו שם עם הסיומת html."]
 open(OUT+"/llms.txt","w",encoding="utf-8").write("\n".join(llm))
 if SITE_URL:
     pg=[f[:-5] for f in sorted(os.listdir(OUT)) if f.endswith(".html") and f!="thanks.html"]

@@ -123,7 +123,7 @@ TAL_ID=(SITE_URL+"/#tal") if SITE_URL else "#tal"
 BIZ = {"@type":"LegalService","@id":OFFICE_ID,"name":NAME,"alternateName":["עו\"ד טל וולק אשכנזי","טל אשכנזי משרד עורכי דין"],"telephone":PHONE_INTL,
  "address":{"@type":"PostalAddress","streetAddress":"כצנלסון 97","addressLocality":"גבעתיים","addressCountry":"IL"},
  "areaServed":{"@type":"Country","name":"ישראל"},"knowsLanguage":"he",
- "employee":{"@type":"Person","@id":TAL_ID,"name":"טל אשכנזי","alternateName":"טל וולק אשכנזי","jobTitle":"עורכת דין","identifier":{"@type":"PropertyValue","name":"מספר רישיון בלשכת עורכי הדין","value":"90780"},"worksFor":{"@id":OFFICE_ID},"knowsAbout":["רשלנות רפואית","נזקי גוף"]},
+ "employee":{"@type":"Person","@id":TAL_ID,"name":"טל אשכנזי","alternateName":"טל וולק אשכנזי","jobTitle":"עורכת דין","image":(SITE_URL+"/assets/tal.webp") if SITE_URL else "assets/tal.webp","identifier":{"@type":"PropertyValue","name":"מספר רישיון בלשכת עורכי הדין","value":"90780"},"worksFor":{"@id":OFFICE_ID},"knowsAbout":["רשלנות רפואית","נזקי גוף"]},
  "knowsAbout":["רשלנות רפואית","נזקי גוף","תאונות דרכים","תאונות עבודה","ביטוח לאומי","אובדן כושר עבודה","תביעות ביטוח"]}
 if SITE_URL: BIZ["url"] = SITE_URL + "/"
 
@@ -234,7 +234,7 @@ PULSE='<svg class="pulse" aria-hidden="true" viewBox="0 0 1440 130" preserveAspe
 ruler=lambda n,lbl:f'<div class="r"><span class="r-l">{lbl}</span><div class="r-t"><i style="width:{n*10}%"></i></div><b>{n}</b></div>'
 axis="".join(f'<span style="right:{k*10}%">{k}</span>' for k in range(0,11))
 hero_visual=f'<img class="hero-photo" src="{url("hero")}" alt="שולחן עבודה עם תיקים משפטיים וצילום רנטגן" width="1344" height="752" decoding="async" fetchpriority="high">'
-statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" loading="lazy">' if PORTRAIT else f'<div class="plate"><img src="{url("office")}" alt="חדר ישיבות עם ספרי משפט" width="1024" height="688" decoding="async" loading="lazy"></div>')
+statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" width="1122" height="1402" decoding="async" loading="lazy">' if PORTRAIT else f'<div class="plate"><img src="{url("office")}" alt="חדר ישיבות עם ספרי משפט" width="1024" height="688" decoding="async" loading="lazy"></div>')
 home+=f'''<section class="hero"><div class="wrap hero-g"><div class="hero-t">
 <p class="kicker">{NAME}</p>
 <h1>עורכת דין<br><em>רשלנות רפואית</em><br>ונזקי גוף</h1>
@@ -260,7 +260,7 @@ pic=f'''<div class="answer"><h2>בקצרה</h2><p>נזקי גוף הם פגיע�
 <section><h2>הנושאים</h2><div class="rel-g">'''+"".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["menu"])}</strong><span>{e(x["card"])}</span></a>' for x in oth)+'</div></section>'
 simple("personal-injury",'עורך דין נזקי גוף: תאונות, ביטוח לאומי וביטוח | טל אשכנזי','נפגעתם בתאונה, בעבודה או בטיפול רפואי? כך מבינים ממי מבקשים פיצוי ומה עושים עכשיו. בדיקה ראשונית ללא עלות. 053-619-9967.','עורכת דין נזקי גוף',pic,ld=graph(BIZ,crumbs_ld([("ראשי","./"),("נזקי גוף וביטוח","")])),with_form=True)
 
-aboutc=f'''<div class="answer"><p>עו"ד טל אשכנזי עוסקת בתביעות רשלנות רפואית ונזקי גוף, עם חמש שנות ניסיון (מספר רישיון 90780). המשרד נמצא בכצנלסון 97 בגבעתיים ומלווה לקוחות מכל הארץ.</p></div>
+aboutc=f'''<img class="about-photo" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" width="1122" height="1402" decoding="async"><div class="answer"><p>עו"ד טל אשכנזי עוסקת בתביעות רשלנות רפואית ונזקי גוף, עם חמש שנות ניסיון (מספר רישיון 90780). המשרד נמצא בכצנלסון 97 בגבעתיים ומלווה לקוחות מכל הארץ.</p></div>
 <section><h2>למה בחרתי בתחום</h2><p>אנשים מגיעים אליי אחרי תקופה קשה, ובדרך כלל בלי לדעת אם מה שקרה להם הוא טעות או גזירת גורל. התפקיד שלי מתחיל בלברר את זה ביושר.</p></section>
 <section><h2>איך אני עובדת</h2><ul class="ticks"><li>בודקת כל תיק בעצמי ואומרת מה הסיכויים, גם כשהם נמוכים</li><li>מסבירה בשפה פשוטה את כל שלבי ההליך</li><li>מעדכנת באופן שוטף</li><li>פועלת עם רופאים מומחים לפי תחום המקרה</li><li>מגדירה מראש בכתב את שכר הטרחה ואת ההוצאות</li></ul></section>
 <section><h2>תחומי עיסוק</h2><ul class="ticks"><li><a href="medical-malpractice.html">רשלנות רפואית</a></li><li><a href="road-accidents.html">תאונות דרכים</a></li><li><a href="work-accidents.html">תאונות עבודה</a></li><li><a href="national-insurance.html">ביטוח לאומי</a></li><li><a href="disability-insurance.html">אובדן כושר עבודה</a></li><li><a href="insurance-claims.html">תביעות ביטוח</a></li></ul></section>'''

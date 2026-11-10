@@ -221,7 +221,7 @@ axis="".join(f'<span style="right:{k*10}%">{k}</span>' for k in range(0,11))
 hero_visual=f'<img class="hero-photo" src="{url("hero")}" alt="שולחן עבודה עם תיקים משפטיים וצילום רנטגן" width="1344" height="752" decoding="async" fetchpriority="high">'
 statement=('<img class="portrait" src="assets/tal.webp" alt="עו&quot;ד טל אשכנזי" loading="lazy">' if PORTRAIT else f'<div class="plate"><img src="{url("office")}" alt="חדר ישיבות עם ספרי משפט" width="1024" height="688" decoding="async" loading="lazy"></div>')
 home+=f'''<section class="hero"><div class="wrap hero-g"><div class="hero-t">
-<p class="kicker">{NAME} · גבעתיים</p>
+<p class="kicker">{NAME}</p>
 <h1>עורכת דין<br><em>רשלנות רפואית</em><br>ונזקי גוף</h1>
 <p class="lede">נפגעתם מטיפול רפואי או בתאונה? אבדוק את התיק באופן אישי, אסביר מה האפשרויות ואלווה אתכם עד סיום ההליך.</p>
 <div class="actions"><a class="btn dark" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn line" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>

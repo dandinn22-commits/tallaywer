@@ -5,7 +5,7 @@ from content import SERVICES, GUIDES, GENERAL_FAQ, S
 from icons import icon
 from content2 import EXTRA, LAWS, LAW_OF
 
-SITE_URL = ""  # למלא כשקונים דומיין, למשל https://www.example.co.il
+SITE_URL = "https://tallawyer.com"
 SRC = os.path.dirname(os.path.abspath(__file__))
 OUT = "/home/claude/tal-law"
 PHONE_INTL = "+972536199967"; PHONE = "053-619-9967"; WA = "972536199967"

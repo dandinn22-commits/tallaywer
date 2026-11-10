@@ -1,3 +1,4 @@
-# גרסאות טקסט ומפת תוכן: /sitemap.md, /llms.txt
 User-agent: *
 Allow: /
+Sitemap: https://tallawyer.com/sitemap.xml
+# גרסאות טקסט ומפת תוכן: https://tallawyer.com/sitemap.md

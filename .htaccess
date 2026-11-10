@@ -1,4 +1,12 @@
 AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://tallawyer.com%{REQUEST_URI} [L,R=301]
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+RewriteRule ^index\.html$ / [L,R=301]
+</IfModule>
 AddType text/markdown;charset=UTF-8 .md
 <IfModule mod_headers.c>
 <FilesMatch "\.(md|txt)$">

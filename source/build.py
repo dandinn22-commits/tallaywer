@@ -3,7 +3,7 @@ import json, os, shutil, html, re, zipfile
 from PIL import Image
 from content import SERVICES, GUIDES, GENERAL_FAQ, S
 from icons import icon
-from content2 import EXTRA, LAWS, LAW_OF
+from content2 import EXTRA, LAWS, LAW_OF, SOURCES, TITLES, SHORTS, FAQ_FIX, FAQ_ADD, FAQ_DROP, TABLES_ADD
 
 SITE_URL = "https://tallawyer.com"
 SRC = os.path.dirname(os.path.abspath(__file__))
@@ -66,11 +66,11 @@ def links(lst): return "".join(f'<li><a href="{s["slug"]}.html">{e(s["menu"])}</
 def nav():
     return f'''<div class="util"><div class="wrap util-in"><span>{ADDR}</span><span>בדיקה ראשונית ללא עלות</span></div></div>
 <header class="site-head"><div class="wrap bar">
-<a class="logo" href="index.html"><span class="logo-t"><strong>טל אשכנזי</strong><span>משרד עורכי דין</span></span></a>
+<a class="logo" href="./"><span class="logo-t"><strong>טל אשכנזי</strong><span>משרד עורכי דין</span></span></a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav">תפריט</button>
 <nav id="nav" aria-label="ראשי"><ul class="top">
 <li class="has"><a href="medical-malpractice.html">רשלנות רפואית</a><ul class="drop">{links(med)}</ul></li>
-<li class="has"><a href="road-accidents.html">נזקי גוף וביטוח</a><ul class="drop">{links(oth)}</ul></li>
+<li class="has"><a href="personal-injury.html">נזקי גוף וביטוח</a><ul class="drop">{links(oth)}</ul></li>
 <li class="has"><a href="guides.html">מדריכים</a><ul class="drop">{links(GUIDES)}</ul></li>
 <li><a href="about.html">אודות</a></li><li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li>
 </ul></nav>
@@ -105,9 +105,9 @@ def foot():
 <div class="f-act"><a class="f-phone" href="tel:{PHONE_INTL}" data-ev="call" dir="ltr">{PHONE}</a><a class="btn gold" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}כתבו בוואטסאפ</a></div></div></section>
 <footer class="foot"><div class="wrap cols">
 <div><p class="f-name">עו"ד טל וולק אשכנזי</p><p>{ADDR}</p><p>טלפון: <a href="tel:{PHONE_INTL}" dir="ltr">{PHONE}</a></p></div>
-<div><h3>רשלנות רפואית</h3><ul>{links(med[:6])}</ul></div>
+<div><h3>רשלנות רפואית</h3><ul>{links(med)}</ul></div>
 <div><h3>נזקי גוף וביטוח</h3><ul>{links(oth)}</ul></div>
-<div><h3>המשרד</h3><ul><li><a href="about.html">אודות</a></li><li><a href="guides.html">מדריכים</a></li><li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li><a href="privacy.html">מדיניות פרטיות</a></li></ul></div>
+<div><h3>המשרד</h3><ul><li><a href="about.html">אודות</a></li><li><a href="personal-injury.html">נזקי גוף</a></li><li><a href="guides.html">מדריכים</a></li>{links(GUIDES)}<li><a href="faq.html">שאלות ותשובות</a></li><li><a href="contact.html">צרו קשר</a></li><li><a href="accessibility.html">הצהרת נגישות</a></li><li><a href="privacy.html">מדיניות פרטיות</a></li></ul></div>
 </div><p class="wrap legal">המידע באתר הוא מידע כללי ואינו מהווה ייעוץ משפטי או תחליף לבדיקת המקרה הפרטני. פרסום זה אינו מבטיח תוצאה.</p></footer>
 <div class="mobile-bar"><a href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}חייגו עכשיו</a><a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>
 <div class="float" aria-label="יצירת קשר מהירה"><a class="fl wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp" aria-label="שליחת הודעה בוואטסאפ">{ICON_WA}</a><a class="fl call" href="tel:{PHONE_INTL}" data-ev="call" aria-label="חיוג ל-{PHONE}">{ICON_PHONE}</a></div>
@@ -119,15 +119,16 @@ def foot():
 </body></html>'''
 
 OFFICE_ID=(SITE_URL+"/#office") if SITE_URL else "#office"
-BIZ = {"@type":["LegalService","Attorney"],"@id":OFFICE_ID,"name":NAME,"telephone":PHONE_INTL,
+TAL_ID=(SITE_URL+"/#tal") if SITE_URL else "#tal"
+BIZ = {"@type":"LegalService","@id":OFFICE_ID,"name":NAME,"alternateName":["עו\"ד טל וולק אשכנזי","טל אשכנזי משרד עורכי דין"],"telephone":PHONE_INTL,
  "address":{"@type":"PostalAddress","streetAddress":"כצנלסון 97","addressLocality":"גבעתיים","addressCountry":"IL"},
  "areaServed":{"@type":"Country","name":"ישראל"},"knowsLanguage":"he",
- "employee":{"@type":"Person","name":"טל אשכנזי","jobTitle":"עורכת דין"},
+ "employee":{"@type":"Person","@id":TAL_ID,"name":"טל אשכנזי","alternateName":"טל וולק אשכנזי","jobTitle":"עורכת דין","worksFor":{"@id":OFFICE_ID},"knowsAbout":["רשלנות רפואית","נזקי גוף"]},
  "knowsAbout":["רשלנות רפואית","נזקי גוף","תאונות דרכים","תאונות עבודה","ביטוח לאומי","אובדן כושר עבודה","תביעות ביטוח"]}
 if SITE_URL: BIZ["url"] = SITE_URL + "/"
 
 def crumbs_ld(trail):
-    items = [{"@type":"ListItem","position":i+1,"name":n} | ({"item":f"{SITE_URL}/{u}"} if SITE_URL and u else {}) for i,(n,u) in enumerate(trail)]
+    items = [{"@type":"ListItem","position":i+1,"name":n} | ({"item":f"{SITE_URL}/{'' if u=='./' else u}"} if SITE_URL and u else {}) for i,(n,u) in enumerate(trail)]
     return {"@type":"BreadcrumbList","itemListElement":items}
 def faq_ld(faqs):
     return {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]}
@@ -157,32 +158,43 @@ def calc():
 <div class="calc-out" data-out aria-live="polite" hidden></div></section>'''
 
 def service_page(s, kind):
-    parent = ("רשלנות רפואית","medical-malpractice.html") if s.get("group")=="med" else (("נזקי גוף וביטוח","road-accidents.html") if kind=="service" else ("מדריכים","guides.html"))
-    trail=[("ראשי","index.html")]
+    parent = ("רשלנות רפואית","medical-malpractice.html") if s.get("group")=="med" else (("נזקי גוף וביטוח","personal-injury.html") if kind=="service" else ("מדריכים","guides.html"))
+    trail=[("ראשי","./")]
     if s["slug"]!="medical-malpractice": trail.append(parent)
     trail.append((s["h1"],""))
     ld = graph(BIZ, crumbs_ld(trail), faq_ld(s["faqs"]),
-      ({"@type":"Article","headline":s["h1"],"description":s["desc"],"author":{"@type":"Person","name":"טל אשכנזי"},"dateModified":"2026-11-09","inLanguage":"he"} if kind=="guide" else {"@type":"Service","name":s["h1"],"serviceType":s["kw"],"provider":{"@id":OFFICE_ID},"areaServed":"ישראל"}))
+      ({"@type":"Article","headline":s["h1"],"description":s["desc"],"author":{"@id":TAL_ID},"publisher":{"@id":OFFICE_ID},"datePublished":"2026-11-09","dateModified":"2026-11-10","inLanguage":"he"} if kind=="guide" else {"@type":"Service","name":s["h1"],"serviceType":s["kw"],"provider":{"@id":OFFICE_ID},"areaServed":"ישראל"}))
     bc = "".join((f'<a href="{u}">{e(n)}</a><span>/</span>' if u else f'<span aria-current="page">{e(n)}</span>') for n,u in trail)
     mid=f'<aside class="mid"><p><strong>רוצים לדעת איך זה נוגע למקרה שלכם?</strong> שיחה קצרה יכולה להבהיר מה כדאי לבדוק.</p><a class="btn dark" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a></aside>'
     parts=[f"<section><h2>{e(x['h'])}</h2>{render_items(x['items'])}</section>" for x in s["sections"]]
     parts.insert(min(2,len(parts)),mid)
     secs="".join(parts)
     lawkey=LAW_OF.get(s["slug"],"med")
-    laws="<section><h2>הבסיס המשפטי</h2><ul class='ticks'>"+"".join(f"<li>{e(l)}</li>" for l in LAWS[lawkey])+"</ul></section>"
+    laws="<section><h2>הבסיס המשפטי</h2><ul class='ticks'>"+"".join(f"<li>{e(l)}</li>" for l in LAWS[lawkey])+"</ul>"
+    if SOURCES.get(s["slug"]): laws+="<h3 class='src-h'>מקורות לקריאה נוספת</h3><ul class='ticks'>"+"".join(f'<li><a href="{u}" target="_blank" rel="noopener">{e(t)}</a></li>' for t,u in SOURCES[s["slug"]])+"</ul>"
+    laws+="</section>"
+    more=""
+    if s["slug"]=="medical-malpractice":
+        more="<section><h2>רשלנות רפואית לפי תחום</h2><ul class='ticks'>"+"".join(f'<li><a href="{x["slug"]}.html">{e(x["h1"])}</a>: {e(x["card"])}</li>' for x in med[1:])+"</ul></section>"
+    elif s.get("group")=="med":
+        extra=[("national-insurance.html","זכויות בביטוח הלאומי")] if s["slug"] in ("eye","birth-injury","cancer-diagnosis") else []
+        more="<section><h2>מדריכים שיעזרו לכם</h2><ul class='ticks'>"+"".join(f'<li><a href="{x["slug"]}.html">{e(x["h1"])}</a></li>' for x in GUIDES)+"".join(f'<li><a href="{h}">{t}</a></li>' for h,t in extra)+'<li><a href="medical-malpractice.html">רשלנות רפואית: מה צריך להוכיח</a></li></ul></section>'
+    elif s.get("group")=="other":
+        more='<section><h2>לפי סוג הפגיעה</h2><p>הדרך לפיצוי תלויה במקור הפגיעה. <a href="personal-injury.html">סקירה של כל המסלולים לנפגעי גוף</a>.</p></section>'
     first='<section class="first"><h2>מה מקבלים בשיחה הראשונה</h2><ul class="ticks"><li>הבנה ראשונית אם כדאי להמשיך לבדוק את המקרה</li><li>הערכה של המועד האחרון להגשת תביעה</li><li>רשימה של המסמכים שכדאי לאסוף</li></ul></section>'
     pool = (med if s.get("group")=="med" else oth if s.get("group") else GUIDES)
     k=[x["slug"] for x in pool].index(s["slug"])
     rel=[pool[(k+1)%len(pool)],pool[(k+2)%len(pool)]]
-    g=GUIDES[0] if s["slug"]!=GUIDES[0]["slug"] else GUIDES[1]
-    rel.append(g if pool is med else pool[(k+3)%len(pool)])
+    if pool is GUIDES: rel=[x for x in GUIDES if x is not s]+[SERVICES[0]]
+    elif pool is med: rel.append(GUIDES[0])
+    else: rel.append(pool[(k+3)%len(pool)])
     relh = "".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["menu"])}</strong><span>{e(x["card"])}</span></a>' for x in rel)
     body = head(s["title"],s["desc"],s["slug"],ld)+nav()+f'''<div class="page-hero"{f""" style="--img:url({url(s['img'])})" """ if has(s["img"]) else ""}>{"" if has(s["img"]) else icon(s["slug"],"ph-icon")}<div class="wrap ph">
 <nav class="crumbs" aria-label="מיקום">{bc}</nav><p class="eyebrow">{e(s["eyebrow"])}</p><h1>{e(s["h1"])}</h1>
 <div class="actions"><a class="btn gold" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn line" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>
 <p class="trust">בדיקה ראשונית ללא עלות · שכר טרחה רק אם מתקבל פיצוי</p></div></div>
 <div class="wrap layout"><article class="prose">
-<div class="answer"><h2>בקצרה</h2><p>{e(s["short"])}</p></div>{first}{calc() if s.get("calc") else ""}{secs}{laws}
+<div class="answer"><h2>בקצרה</h2><p>{e(s["short"])}</p></div>{first}{calc() if s.get("calc") else ""}{secs}{more}{laws}
 <section><h2>איך התהליך עובד</h2>{steps()}</section>
 <section><h2>שאלות נפוצות</h2>{faq_html(s["faqs"])}</section>
 <p class="byline">נכתב על ידי <a href="about.html">{NAME}</a>. עודכן בנובמבר 2026. מידע כללי שאינו מחליף ייעוץ משפטי.</p>
@@ -192,14 +204,17 @@ def service_page(s, kind):
     open(f'{OUT}/{s["slug"]}.html','w',encoding='utf-8').write(body)
 
 def simple(slug,title,desc,h1,content,noindex=False,ld=None,with_form=False):
-    b=head(title,desc,slug,ld or graph(BIZ,crumbs_ld([("ראשי","index.html"),(h1,"")])),noindex)+nav()
+    b=head(title,desc,slug,ld or graph(BIZ,crumbs_ld([("ראשי","./"),(h1,"")])),noindex)+nav()
     aside=f'<aside class="side">{form()}</aside>' if with_form else ''
     b+=f'<div class="plain-head">{icon("contact" if slug=="contact" else "insurance-claims","ph-icon")}<div class="wrap"><h1>{e(h1)}</h1></div></div><div class="wrap {"layout" if with_form else "narrow"}"><article class="prose">{content}</article>{aside}</div>'+foot()
     open(f'{OUT}/{slug}.html','w',encoding='utf-8').write(b)
 
 for s in SERVICES+GUIDES:
     x=EXTRA.get(s["slug"],{})
-    s["sections"]=s["sections"]+x.get("s",[]); s["faqs"]=s["faqs"]+x.get("f",[])
+    s["sections"]=s["sections"]+x.get("s",[])+TABLES_ADD.get(s["slug"],[]); s["faqs"]=s["faqs"]+x.get("f",[])
+    s["faqs"]=[(q,FAQ_FIX.get(q,a)) for q,a in s["faqs"] if not (s["slug"] in FAQ_DROP and q.startswith("כמה עולה עורכת דין"))]+FAQ_ADD.get(s["slug"],[])
+    if s["slug"] in TITLES: s["title"]=TITLES[s["slug"]]
+    if s["slug"] in SHORTS: s["short"]=SHORTS[s["slug"]]
 for s in SERVICES: service_page(s,"service")
 for g in GUIDES: service_page(g,"guide")
 
@@ -214,7 +229,7 @@ def tiles(items): return '<div class="tiles">'+"".join(f'<a class="tile" href="{
 # דף הבית
 def cells(lst): return "".join(f'<a class="cell" href="{s["slug"]}.html">{icon(s["slug"])}<h3>{e(s["menu"])}</h3><p>{e(s["card"])}</p><span class="go">קראו עוד</span></a>' for s in lst)
 home_faq=GENERAL_FAQ[:5]
-home=head('עורכת דין רשלנות רפואית ונזקי גוף | טל אשכנזי, גבעתיים','עו"ד טל אשכנזי מלווה נפגעי רשלנות רפואית, תאונות וביטוח. בדיקה ראשונית ללא עלות, שכר טרחה רק אם מתקבל פיצוי. כצנלסון 97 גבעתיים. 053-619-9967.','index',graph(BIZ,faq_ld(home_faq),{"@type":"WebSite","name":NAME,"inLanguage":"he"}))+nav()
+home=head('עו"ד טל אשכנזי | עורך דין רשלנות רפואית ונזקי גוף','עו"ד טל אשכנזי מלווה נפגעי רשלנות רפואית, תאונות וביטוח. בדיקה ראשונית ללא עלות, שכר טרחה רק אם מתקבל פיצוי. כצנלסון 97 גבעתיים. 053-619-9967.','index',graph(BIZ,faq_ld(home_faq),{"@type":"WebSite","name":NAME,"inLanguage":"he"}))+nav()
 PULSE='<svg class="pulse" aria-hidden="true" viewBox="0 0 1440 130" preserveAspectRatio="none" fill="none"><path pathLength="1" vector-effect="non-scaling-stroke" d="M0 86H470l16-10 16 10h26l12 18 20-96 20 116 14-38h30l18-14 18 14H1440"/></svg>'
 ruler=lambda n,lbl:f'<div class="r"><span class="r-l">{lbl}</span><div class="r-t"><i style="width:{n*10}%"></i></div><b>{n}</b></div>'
 axis="".join(f'<span style="right:{k*10}%">{k}</span>' for k in range(0,11))
@@ -238,13 +253,20 @@ home+=f'''<section class="hero"><div class="wrap hero-g"><div class="hero-t">
 '''+foot()
 open(f'{OUT}/index.html','w',encoding='utf-8').write(home)
 
+pi_rows=[["תאונת דרכים","חברת הביטוח של הרכב, ובמקרים מסוימים קרנית","road-accidents"],["תאונה בעבודה או בדרך אליה","הביטוח הלאומי, ולפעמים גם המעסיק","work-accidents"],["מחלה או תאונה שפגעו ביכולת לעבוד","הביטוח הלאומי, וחברת הביטוח או קרן הפנסיה","disability-insurance"],["נכות שמגבילה את היום יום","הביטוח הלאומי","national-insurance"],["פוליסה פרטית: תאונות אישיות, מחלות קשות, סיעוד","חברת הביטוח","insurance-claims"],["טיפול רפואי","הרופא, בית החולים, קופת החולים או המבטח שלהם","medical-malpractice"]]
+pic=f'''<div class="answer"><h2>בקצרה</h2><p>נזקי גוף הם פגיעה גופנית או נפשית שנגרמה בתאונה, בעבודה או בטיפול רפואי. הדרך לפיצוי תלויה במקור הפגיעה: חברת ביטוח הרכב, הביטוח הלאומי, המעסיק, פוליסה פרטית או הגורם המטפל. לפעמים יש יותר ממסלול אחד, והסדר שבו פונים משפיע על הפיצוי.</p></div>
+<section><h2>למי פונים, לפי סוג הפגיעה</h2><div class="tbl"><table><thead><tr><th scope="col">מה קרה</th><th scope="col">ממי מבקשים פיצוי</th></tr></thead><tbody>'''+"".join(f'<tr><td><a href="{r[2]}.html">{e(r[0])}</a></td><td>{e(r[1])}</td></tr>' for r in pi_rows)+'''</tbody></table></div></section>
+<section><h2>מה כדאי לעשות כבר עכשיו</h2><ul class="ticks"><li>לקבל טיפול רפואי ולוודא שהאירוע מתועד</li><li>לשמור מסמכים רפואיים, קבלות ואישורים מהעבודה</li><li>לא לחתום על ויתור או הסדר לפני בדיקה</li><li>לבדוק את המועד האחרון להגשה, כי הוא שונה בין המסלולים</li></ul></section>
+<section><h2>הנושאים</h2><div class="rel-g">'''+"".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["menu"])}</strong><span>{e(x["card"])}</span></a>' for x in oth)+'</div></section>'
+simple("personal-injury",'עורך דין נזקי גוף: תאונות, ביטוח לאומי וביטוח | טל אשכנזי','נפגעתם בתאונה, בעבודה או בטיפול רפואי? כך מבינים ממי מבקשים פיצוי ומה עושים עכשיו. בדיקה ראשונית ללא עלות. 053-619-9967.','עורכת דין נזקי גוף',pic,ld=graph(BIZ,crumbs_ld([("ראשי","./"),("נזקי גוף וביטוח","")])),with_form=True)
+
 aboutc=f'''<div class="answer"><p>עו"ד טל אשכנזי עוסקת בתביעות רשלנות רפואית ונזקי גוף, עם חמש שנות ניסיון. המשרד נמצא בכצנלסון 97 בגבעתיים ומלווה לקוחות מכל הארץ.</p></div>
 <section><h2>למה בחרתי בתחום</h2><p>אנשים מגיעים אליי אחרי תקופה קשה, ובדרך כלל בלי לדעת אם מה שקרה להם הוא טעות או גזירת גורל. התפקיד שלי מתחיל בלברר את זה ביושר.</p></section>
 <section><h2>איך אני עובדת</h2><ul class="ticks"><li>בודקת כל תיק בעצמי ואומרת מה הסיכויים, גם כשהם נמוכים</li><li>מסבירה בשפה פשוטה את כל שלבי ההליך</li><li>מעדכנת באופן שוטף</li><li>פועלת עם רופאים מומחים לפי תחום המקרה</li><li>מגדירה מראש בכתב את שכר הטרחה ואת ההוצאות</li></ul></section>
 <section><h2>תחומי עיסוק</h2><ul class="ticks"><li><a href="medical-malpractice.html">רשלנות רפואית</a></li><li><a href="road-accidents.html">תאונות דרכים</a></li><li><a href="work-accidents.html">תאונות עבודה</a></li><li><a href="national-insurance.html">ביטוח לאומי</a></li><li><a href="disability-insurance.html">אובדן כושר עבודה</a></li><li><a href="insurance-claims.html">תביעות ביטוח</a></li></ul></section>'''
-simple("about",'אודות עו"ד טל אשכנזי | רשלנות רפואית ונזקי גוף','עו"ד טל אשכנזי, 5 שנות ניסיון ברשלנות רפואית ונזקי גוף. יחס אישי, הסברים ברורים. כצנלסון 97, גבעתיים.','אודות עו"ד טל אשכנזי',aboutc,with_form=True)
+simple("about",'אודות עו"ד טל אשכנזי | רשלנות רפואית ונזקי גוף בגבעתיים','עו"ד טל אשכנזי, 5 שנות ניסיון ברשלנות רפואית ונזקי גוף. יחס אישי, הסברים ברורים. כצנלסון 97, גבעתיים.','אודות עו"ד טל אשכנזי',aboutc,with_form=True)
 
-simple("faq",'שאלות ותשובות על רשלנות רפואית ונזקי גוף | עו"ד טל אשכנזי','תשובות לשאלות נפוצות על תביעות רשלנות רפואית, שכר טרחה, התיישנות ותהליך העבודה.','שאלות ותשובות',faq_html(GENERAL_FAQ),ld=graph(BIZ,faq_ld(GENERAL_FAQ)),with_form=True)
+simple("faq",'שאלות ותשובות על רשלנות רפואית ונזקי גוף | עו"ד טל אשכנזי','תשובות לשאלות נפוצות על תביעות רשלנות רפואית, שכר טרחה, התיישנות ותהליך העבודה.','שאלות ותשובות',faq_html(GENERAL_FAQ),ld=graph(BIZ,faq_ld(GENERAL_FAQ),crumbs_ld([("ראשי","./"),("שאלות ותשובות","")])),with_form=True)
 
 gl="".join(f'<a class="rel" href="{x["slug"]}.html">{icon(x["slug"])}<strong>{e(x["h1"])}</strong><span>{e(x["card"])}</span></a>' for x in GUIDES)
 simple("guides",'מדריכים לנפגעי רשלנות רפואית | עו"ד טל אשכנזי','מדריכים בשפה פשוטה לנפגעי רשלנות רפואית: התיישנות, חוות דעת רפואית, ואיך מקבלים עותק של התיק הרפואי.','מדריכים',f'<div class="rel-g">{gl}</div>')
@@ -252,7 +274,7 @@ simple("guides",'מדריכים לנפגעי רשלנות רפואית | עו"ד
 cc=f'''<p class="big-phone"><a href="tel:{PHONE_INTL}" dir="ltr" data-ev="call">{PHONE}</a></p>
 <ul class="ticks"><li>כתובת: {ADDR}</li><li>וואטסאפ: <a href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">שלחו הודעה</a></li><li>פגישה במשרד בתיאום מראש</li></ul>
 <p><a class="link" href="https://www.google.com/maps/search/?api=1&query=%D7%9B%D7%A6%D7%A0%D7%9C%D7%A1%D7%95%D7%9F+97+%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D" target="_blank" rel="noopener">פתחו ניווט למשרד</a></p>'''
-simple("contact",'עורכת דין רשלנות רפואית בגבעתיים | צרו קשר | טל אשכנזי','פנו לעו"ד טל אשכנזי לבדיקה ראשונית ללא עלות. טלפון 053-619-9967, כצנלסון 97, גבעתיים.','צרו קשר',cc,with_form=True)
+simple("contact",'צרו קשר | עו"ד טל אשכנזי, כצנלסון 97 גבעתיים','פנו לעו"ד טל אשכנזי לבדיקה ראשונית ללא עלות. טלפון 053-619-9967, כצנלסון 97, גבעתיים.','צרו קשר',cc,with_form=True)
 
 simple("thanks",'תודה על פנייתכם | עו"ד טל אשכנזי','הפנייה שלכם לעו"ד טל אשכנזי התקבלה.','תודה על פנייתכם',f'<p>אם הוואטסאפ לא נפתח, אפשר לשלוח הודעה ישירות או להתקשר:</p><div class="actions"><a class="btn gold" href="tel:{PHONE_INTL}" data-ev="call">{ICON_PHONE}<span dir="ltr">{PHONE}</span></a><a class="btn dark" href="https://wa.me/{WA}" target="_blank" rel="noopener" data-ev="whatsapp">{ICON_WA}וואטסאפ</a></div>',noindex=True)
 
@@ -279,6 +301,14 @@ simple("privacy",'מדיניות פרטיות | עו"ד טל אשכנזי','מד
 for f in ("favicon.svg","favicon-48.png","apple-touch-icon.png"): shutil.copy(SRC+"/"+f,OUT)
 shutil.copy(SRC+"/style.css",OUT); shutil.copy(SRC+"/main.js",OUT)
 open(OUT+"/.htaccess","w").write('''AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\\. [NC]
+RewriteRule ^ https://tallawyer.com%{REQUEST_URI} [L,R=301]
+RewriteCond %{THE_REQUEST} \\s/index\\.html[\\s?] [NC]
+RewriteRule ^index\\.html$ / [L,R=301]
+</IfModule>
 AddType text/markdown;charset=UTF-8 .md
 <IfModule mod_headers.c>
 <FilesMatch "\\.(md|txt)$">
@@ -306,7 +336,10 @@ def md(p):
             else: o+=[it,""]
     o+=["## שאלות נפוצות",""]
     for q,a in p["faqs"]: o+=[f"### {q}","",a,""]
-    o+=[f"{NAME}, {ADDR}, טלפון {PHONE}. מידע כללי שאינו ייעוץ משפטי.",""]
+    o+=["## הבסיס המשפטי",""]+[f"- {l}" for l in LAWS[LAW_OF.get(p["slug"],"med")]]+[""]
+    if SOURCES.get(p["slug"]): o+=["### מקורות",""]+[f"- [{t}]({u})" for t,u in SOURCES[p["slug"]]]+[""]
+    o+=["## שאלות נפוצות",""] if False else []
+    o+=[f"נכתב על ידי עו\"ד טל אשכנזי (טל וולק אשכנזי). עודכן ב-10 בנובמבר 2026.",f"{NAME}, {ADDR}, טלפון {PHONE}. מידע כללי שאינו ייעוץ משפטי.",""]
     open(f"{OUT}/{p['slug']}.md","w",encoding="utf-8").write("\n".join(o))
 for p in SERVICES+GUIDES: md(p)
 def html2md(slug,title):
@@ -317,11 +350,12 @@ def html2md(slug,title):
     m=re.sub(r'<a [^>]*href="([^"]+)"[^>]*>(.*?)</a>',lambda g:f"[{g.group(2)}]({g.group(1).replace('.html','.md')})" if g.group(1).endswith('.html') else g.group(2),m)
     m=html.unescape(re.sub(r"<[^>]+>","",m));m=re.sub(r"\n{3,}","\n\n",m).strip()
     open(f"{OUT}/{slug}.md","w",encoding="utf-8").write(f"# {title}\n\n{m}\n")
-for sl,ti in [("about",'אודות עו"ד טל אשכנזי'),("faq","שאלות ותשובות"),("contact","צרו קשר"),("accessibility","הצהרת נגישות"),("privacy","מדיניות פרטיות")]: html2md(sl,ti)
-open(OUT+"/index.md","w",encoding="utf-8").write(f"# {NAME}\n\nעורכת דין העוסקת ברשלנות רפואית ונזקי גוף, עם 5 שנות ניסיון. {ADDR}. טלפון {PHONE}. בדיקה ראשונית ללא עלות, ושכר טרחה רק במקרה של פיצוי.\n\nמפת התוכן: [sitemap.md](sitemap.md)\n")
+for sl,ti in [("personal-injury","עורכת דין נזקי גוף"),("about",'אודות עו"ד טל אשכנזי'),("faq","שאלות ותשובות"),("contact","צרו קשר"),("accessibility","הצהרת נגישות"),("privacy","מדיניות פרטיות")]: html2md(sl,ti)
+open(OUT+"/index.md","w",encoding="utf-8").write(f"# {NAME}\n\nעו\"ד טל אשכנזי (טל וולק אשכנזי) עוסקת ברשלנות רפואית ונזקי גוף, עם 5 שנות ניסיון. {ADDR}. טלפון {PHONE}. בדיקה ראשונית ללא עלות, ושכר טרחה רק במקרה של פיצוי. מלווה לקוחות מכל הארץ.\n\n## תחומי עיסוק\n\n"+"\n".join(f"- [{p['h1']}]({p['slug']}.md)" for p in SERVICES)+"\n\n## שאלות נפוצות\n\n"+"\n\n".join(f"### {q}\n\n{a}" for q,a in GENERAL_FAQ[:5])+"\n\nמפת התוכן: [sitemap.md](sitemap.md)\n")
 def lst(a): return [f"- [{p['h1']}]({p['slug']}.md)" for p in a]
-open(OUT+"/sitemap.md","w",encoding="utf-8").write("\n".join([f"# מפת תוכן: {NAME}","","- [דף הבית](index.md)","- [אודות](about.md)","- [שאלות ותשובות](faq.md)","- [צרו קשר](contact.md)","","## רשלנות רפואית",""]+lst(med)+["","## נזקי גוף וביטוח",""]+lst(oth)+["","## מדריכים",""]+lst(GUIDES)+["","## מדיניות","","- [הצהרת נגישות](accessibility.md)","- [מדיניות פרטיות](privacy.md)",""]))
-llm=[f"# {NAME}","",f"> עורכת דין העוסקת ברשלנות רפואית ונזקי גוף. {ADDR}. טלפון {PHONE}. 5 שנות ניסיון.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in med]+["","## נזקי גוף וביטוח"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({s['slug']}.html): {s['short']}" for s in GUIDES]+["","גרסאות טקסט של הדפים נמצאות במפת התוכן: [sitemap.md](sitemap.md).","לכל דף יש גרסת טקסט באותו שם עם הסיומת md."]
+open(OUT+"/sitemap.md","w",encoding="utf-8").write("\n".join([f"# מפת תוכן: {NAME}","","- [דף הבית](index.md)","- [אודות](about.md)","- [שאלות ותשובות](faq.md)","- [צרו קשר](contact.md)","","## רשלנות רפואית",""]+lst(med)+["","## נזקי גוף וביטוח","","- [עורכת דין נזקי גוף: סקירה](personal-injury.md)"]+lst(oth)+["","## מדריכים",""]+lst(GUIDES)+["","## מדיניות","","- [הצהרת נגישות](accessibility.md)","- [מדיניות פרטיות](privacy.md)",""]))
+U=SITE_URL+"/" if SITE_URL else ""
+llm=[f"# {NAME}","",f"> עו\"ד טל אשכנזי (טל וולק אשכנזי), עורכת דין העוסקת ברשלנות רפואית ונזקי גוף, עם 5 שנות ניסיון. {ADDR}. טלפון {PHONE}. מלווה לקוחות מכל הארץ.","","## רשלנות רפואית"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in med]+["","## נזקי גוף וביטוח",f"- [עורכת דין נזקי גוף]({U}personal-injury.md): ממי מבקשים פיצוי לפי סוג הפגיעה."]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in oth]+["","## מדריכים"]+[f"- [{s['h1']}]({U}{s['slug']}.md): {s['short']}" for s in GUIDES]+["","## המשרד",f"- [אודות]({U}about.md)",f"- [שאלות ותשובות]({U}faq.md)",f"- [צרו קשר]({U}contact.md)","",f"מפת התוכן המלאה: [sitemap.md]({U}sitemap.md). לכל דף באתר יש גרסת HTML באותו שם עם הסיומת html."]
 open(OUT+"/llms.txt","w",encoding="utf-8").write("\n".join(llm))
 if SITE_URL:
     pg=[f[:-5] for f in sorted(os.listdir(OUT)) if f.endswith(".html") and f!="thanks.html"]

@@ -19,6 +19,7 @@
 
 ## נזקי גוף וביטוח
 
+- [עורכת דין נזקי גוף: סקירה](personal-injury.md)
 - [עורכת דין תאונות דרכים](road-accidents.md)
 - [עורכת דין תאונות עבודה](work-accidents.md)
 - [עורכת דין ביטוח לאומי](national-insurance.md)

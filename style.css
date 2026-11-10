@@ -172,3 +172,4 @@ body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px));font-size:17px}
 @media(max-width:1120px){.layout>.side{order:-1}}
 @media(max-width:640px){.float{display:none}.a11y-btn{bottom:calc(70px + env(safe-area-inset-bottom,0px));width:44px;height:44px}.a11y{bottom:calc(122px + env(safe-area-inset-bottom,0px))}.consent{inset:auto 12px calc(70px + env(safe-area-inset-bottom,0px))}}
 @media(max-width:760px){.page-hero[style]{background:linear-gradient(0deg,rgba(246,242,234,.93),rgba(246,242,234,.93)),var(--img) center/cover}}
+.src-h{font-size:18px;margin-top:16px}

@@ -11,6 +11,7 @@ OUT = "/home/claude/tal-law"
 PHONE_INTL = "+972536199967"; PHONE = "053-619-9967"; WA = "972536199967"
 ADDR = "כצנלסון 97, גבעתיים"; NAME = 'עו"ד טל אשכנזי'
 GTAG = ""  # מזהה גוגל אדס, למשל AW-123456789 (לא בשימוש כשיש GTM)
+GA4 = "G-2MHX5KLL43"  # אנליטיקס מותקן ישירות. לא להוסיף אותו גם בתוך GTM
 GTM = "GTM-N3TPVPSF"  # תגים של גוגל (אנליטיקס, אדס) מנוהלים בתוך GTM
 
 e = html.escape
@@ -45,11 +46,12 @@ def head(title, desc, slug, schema, noindex=False):
              'var c=null;try{c=localStorage.getItem("consent")}catch(e){}'
              'var v=c==="y"?"granted":"denied";'
              'gtag("consent","default",{ad_storage:v,analytics_storage:v,ad_user_data:v,ad_personalization:v,wait_for_update:500});'
-             'gtag("js",new Date());</script>\n'
+             'gtag("js",new Date());GA4CFG</script>\nGA4SRC'
              '<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});'
              'var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;'
              'j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})'
              f'(window,document,"script","dataLayer","{GTM}");</script>')
+        g = g.replace('GA4CFG', f'gtag("config","{GA4}");' if GA4 else '').replace('GA4SRC', f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4}"></script>\n' if GA4 else '')
     return f'''<!doctype html>
 <html lang="he" dir="rtl">
 <head>

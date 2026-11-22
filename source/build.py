@@ -10,7 +10,8 @@ SRC = os.path.dirname(os.path.abspath(__file__))
 OUT = "/home/claude/tal-law"
 PHONE_INTL = "+972536199967"; PHONE = "053-619-9967"; WA = "972536199967"
 ADDR = "כצנלסון 97, גבעתיים"; NAME = 'עו"ד טל אשכנזי'
-GTAG = ""  # מזהה גוגל אדס / אנליטיקס, למשל AW-123456789
+GTAG = ""  # מזהה גוגל אדס, למשל AW-123456789 (לא בשימוש כשיש GTM)
+GTM = "GTM-N3TPVPSF"  # תגים של גוגל (אנליטיקס, אדס) מנוהלים בתוך GTM
 
 e = html.escape
 shutil.rmtree(OUT, ignore_errors=True)
@@ -37,7 +38,18 @@ oth = [s for s in SERVICES if s["group"] == "other"]
 def head(title, desc, slug, schema, noindex=False):
     canon = f'<link rel="canonical" href="{SITE_URL}/{"" if slug=="index" else slug+".html"}">\n<meta property="og:url" content="{SITE_URL}/{"" if slug=="index" else slug+".html"}">' if SITE_URL else ""
     img = f'<meta property="og:image" content="{SITE_URL}/assets/hero.webp">' if SITE_URL else ""
+    gbody = (f'<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n' if GTM else '')
     g = ''
+    if GTM:
+        g = ('<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}'
+             'var c=null;try{c=localStorage.getItem("consent")}catch(e){}'
+             'var v=c==="y"?"granted":"denied";'
+             'gtag("consent","default",{ad_storage:v,analytics_storage:v,ad_user_data:v,ad_personalization:v,wait_for_update:500});'
+             'gtag("js",new Date());</script>\n'
+             '<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});'
+             'var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;'
+             'j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})'
+             f'(window,document,"script","dataLayer","{GTM}");</script>')
     return f'''<!doctype html>
 <html lang="he" dir="rtl">
 <head>
@@ -58,7 +70,7 @@ def head(title, desc, slug, schema, noindex=False):
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 </head>
 <body>
-<a class="skip" href="#main">דלגו לתוכן</a>
+{gbody}<a class="skip" href="#main">דלגו לתוכן</a>
 '''
 
 def links(lst): return "".join(f'<li><a href="{s["slug"]}.html">{e(s["menu"])}</a></li>' for s in lst)
@@ -114,7 +126,7 @@ def foot():
 <button class="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y" aria-label="פתיחת תפריט נגישות"><svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="12" cy="4.500" r="2.200"/><path d="M4 8.200l.6-1.800c4.900 1.300 9.900 1.300 14.800 0l.6 1.800c-2 .6-4 1-6 1.200v3.300l2.500 7.500-1.800.6L12.300 14h-.6l-2.400 6.800-1.800-.6 2.500-7.500V9.400c-2-.2-4-.6-6-1.200z"/></svg></button>
 <div class="a11y" id="a11y" role="group" aria-label="הגדרות נגישות" hidden><h2>נגישות</h2><button type="button" data-a="bigger">הגדלת טקסט</button><button type="button" data-a="smaller">הקטנת טקסט</button><button type="button" data-a="contrast" aria-pressed="false">ניגודיות גבוהה</button><button type="button" data-a="links" aria-pressed="false">הדגשת קישורים</button><button type="button" data-a="still" aria-pressed="false">עצירת הנפשות</button><button type="button" data-a="reset">איפוס</button><a href="accessibility.html">הצהרת נגישות</a></div>
 <div class="consent" data-consent hidden><p>אנו משתמשים בעוגיות של גוגל למדידה ופרסום, רק אם תאשרו. <a href="privacy.html#cookies">פרטים נוספים</a></p><div class="consent-b"><button type="button" class="btn dark" data-c="y">אישור</button><button type="button" class="btn line" data-c="n">דחייה</button></div></div>
-<script>window.SITE_GTAG="{GTAG}";</script>
+<script>window.SITE_GTAG="{GTAG}";window.SITE_GTM="{GTM}";</script>
 <script src="main.js"></script>
 <script src="/lead-alerts.js?v=1" data-brand="עו&quot;ד טל אשכנזי" defer></script>
 </body></html>'''

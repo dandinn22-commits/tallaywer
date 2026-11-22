@@ -99,18 +99,25 @@
     });
     apply();
   }
-  // עוגיות: גוגל נטענת רק אחרי אישור, ורק אם הוגדר מזהה
-  var id = window.SITE_GTAG;
+  // עוגיות: גוגל (GTM) נטען תמיד במצב "ללא עוגיות", ועובר למדידה מלאה רק אחרי אישור
+  var id = window.SITE_GTAG, gtm = window.SITE_GTM;
   function loadG() {
     var s = document.createElement("script"); s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
     window.gtag = function () { window.dataLayer.push(arguments); }; window.gtag("js", new Date()); window.gtag("config", id);
   }
-  if (id) {
+  function grant(v) {
+    if (gtm && typeof window.gtag === "function") {
+      var g = v === "y" ? "granted" : "denied";
+      window.gtag("consent", "update", { ad_storage: g, analytics_storage: g, ad_user_data: g, ad_personalization: g });
+      window.dataLayer.push({ event: v === "y" ? "consent_granted" : "consent_denied" });
+    } else if (id && v === "y") loadG();
+  }
+  if (gtm || id) {
     var c = store("consent"), box = document.querySelector("[data-consent]");
-    if (c === "y") loadG();
+    if (c === "y" && !gtm) loadG();
     else if (!c && box) {
       box.hidden = false;
-      box.addEventListener("click", function (e) { var v = e.target.getAttribute && e.target.getAttribute("data-c"); if (!v) return; store("consent", v); box.hidden = true; if (v === "y") loadG(); });
+      box.addEventListener("click", function (e) { var v = e.target.getAttribute && e.target.getAttribute("data-c"); if (!v) return; store("consent", v); box.hidden = true; grant(v); });
     }
   }
 })();
